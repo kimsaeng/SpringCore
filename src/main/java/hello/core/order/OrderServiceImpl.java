@@ -14,7 +14,6 @@ public class OrderServiceImpl implements OrderService {
     private final DiscountPolicy discountPolicy;
 //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 
-
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
@@ -23,8 +22,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
         Member member = memberRepository.findById(memberId);
-        int discountPrince = discountPolicy.discount(member, itemPrice);
+        int discountPrice = discountPolicy.discount(member, itemPrice);
 
-        return new Order(memberId, itemName, itemPrice, discountPrince);
+        return new Order(memberId, itemName, itemPrice, discountPrice);
     }
 }
